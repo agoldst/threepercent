@@ -1,0 +1,23 @@
+* 2013-03-07
+
+Downloaded five spreadsheets from openletter site
+Saved "Countries" sheets (with counts by country) to csv files:
+src/20nn/countries.csv
+manually trimmed totals line
+concatenated all together as vis/countries2008-2012.csv
+produced ods spreadsheet and PDF as handout for ARF class
+
+Then saved "Titles" sheets (the primary data) to csv files:
+src/20nn/titles.csv
+manually trimmed header line from 2009-2012 files, concatenated into:
+all-titles.csv
+[log entry written 2013-03-08]
+
+* 2013-03-08
+
+all-titles.csv put under vc
+fixed typo in header line ("Lanuage")
+all-titles.csv is suitable for R read.csv() import
+
+
+
