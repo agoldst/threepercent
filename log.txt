@@ -19,5 +19,10 @@ all-titles.csv put under vc
 fixed typo in header line ("Lanuage")
 all-titles.csv is suitable for R read.csv() import
 
+idea: ISBN means worldcat data could be linked in
 
+did
+    sed -E 's/^([0-9]+)/"\1"/' all_titles.csv
+in order to quote ISBN's so they go into R as text
 
+and removed a garbage '^K' character in just one of the ISBN (in source data)
