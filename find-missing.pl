@@ -26,18 +26,18 @@ use open qw( :std :utf8 );                  # default utf8 layer
 
 my $threep_file = "threepct_countries.txt";
 # my $unesco_file = "unesco-book/unesco_countries.txt";
-my $who_file = "who-pop/who-countries.csv";
-
+#my $who_file = "who-pop/who-countries.csv";
+my $other_file = shift;
 
 my %threep = hash_read($threep_file);
-my %who = hash_read($who_file);
+my %other = hash_read($other_file);
 
-say 'In 3%, missing from WHO:';
-compare_hash(\%threep,\%who);
+say 'In 3%, missing from other';
+compare_hash(\%threep,\%other);
 
 say '-----------------';
 
-#say 'In WHO, missing from 3%';
+#say 'In other, missing from 3%';
 #compare_hash(\%who,\%threep);
 
 sub hash_read {
