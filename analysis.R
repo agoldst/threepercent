@@ -12,6 +12,7 @@ pop <- read.csv("who-pop/data-text.csv",as.is=TRUE)
 
 # populations (in thousands) in 2010
 total.pop <- subset(pop,subset=(Indicator=="Population (in thousands) total" & Year==2010),select=c(Country,Numeric))
+names(total.pop) <- c("Country","Population")
 
 # book production: UNESCO
 
@@ -76,9 +77,8 @@ country.auth <- read.csv("country_authority.csv",as.is=TRUE)
 # joined data
 # create a "hash" of country populations keyed to three percent country names
 # first we merge the population df with the country-names authority list
-names(total.pop) <- c("WHO","Population")
 country.pop.df <- subset(
-  merge(total.pop,country.auth),
+  merge(total.pop,country.auth,by.x="Country",by.y="WHO"),
   select=c(three.percent,Population))
 
 # then we assign the pop. data to a vector and the country names to the vector names 
@@ -86,21 +86,19 @@ country.pop <- as.numeric(country.pop.df$Population)
 names(country.pop) <- country.pop.df$three.percent
   
 # same process with lit production
-names(lit.prod) <- c("UNESCO","Literature","prod.year")
 country.lit.prod.df <- subset(
-  merge(lit.prod,country.auth),
-  select=c(three.percent,Literature))
+  merge(lit.prod,country.auth,by.x="Country",by.y="UNESCO"),
+  select=c(three.percent,Literature.filled))
 
-country.lit.prod <- country.lit.prod.df$Literature
+country.lit.prod <- country.lit.prod.df$Literature.filled
 names(country.lit.prod) <- country.lit.prod.df$three.percent
 
 # and with total book production
-names(book.prod) <- c("UNESCO","Total","Total.year")
 country.book.prod.df <- subset(
-  merge(book.prod,country.auth),
-  select=c(three.percent,Total))
+  merge(book.prod,country.auth,by.x="Country",by.y="UNESCO"),
+  select=c(three.percent,Total.filled))
 
-country.book.prod <- country.book.prod.df$Total
+country.book.prod <- country.book.prod.df$Total.filled
 names(country.book.prod) <- country.book.prod.df$three.percent
 
 # summary data
@@ -123,6 +121,9 @@ for(i in seq_along(countries.df$Country)) {
     countries.df$Freq[i] / country.book.prod[as.character(countries.df$Country[i])] 
 }
 
+# List top numbers for a given year
+# by category as specified by "per"
+# choices: per.lit, per.book, per.capita
 top.in.year <- function(df,year,n=10,per="per.lit") {
   rows <- subset(df,subset=(Year==year))
   rows[order(rows[[per]],decreasing=TRUE)[1:n],]
