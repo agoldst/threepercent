@@ -8,13 +8,13 @@ three.percent,WHO,UNESCO
 "Austria","Austria"
 "Belarus","Belarus"
 "Belgium","Belgium"
-"Bolivia","Bolivia (Plurinational State of)"
+"Bolivia","Bolivia (Plurinational State of)","Bolivia (Plurinational State of)"
 "Bosnia and Herzegovina","Bosnia and Herzegovina"
 "Brazil","Brazil"
 "Bulgaria","Bulgaria"
 "Cameroon","Cameroon"
 "Chile","Chile"
-"China","China"
+"China","China","China"
 "Colombia","Colombia"
 "Congo","Congo"
 "Costa Rica","Costa Rica"
@@ -28,7 +28,7 @@ three.percent,WHO,UNESCO
 "Egypt","Egypt"
 "El Salvador","El Salvador"
 "Estonia","Estonia"
-"Faroe Islands",NA,
+"Faroe Islands",NA,NA
 "Finland","Finland"
 "France","France"
 "Georgia","Georgia"
@@ -41,7 +41,7 @@ three.percent,WHO,UNESCO
 "Hungary","Hungary"
 "Iceland","Iceland"
 "India","India"
-"Iran"," Islamic Republic of","Iran (Islamic Republic of)"
+"Iran"," Islamic Republic of","Iran (Islamic Republic of)","Iran (Islamic Republic of)"
 "Iraq","Iraq"
 "Israel","Israel"
 "Italy","Italy"
@@ -50,50 +50,50 @@ three.percent,WHO,UNESCO
 "Kyrgyzstan","Kyrgyzstan"
 "Lebanon","Lebanon"
 "Libya","Libya"
-"Libyan Arab Jamahiriya","Libya"
+"Libyan Arab Jamahiriya","Libya","Libya"
 "Lithuania","Lithuania"
-"Macedonia","The former Yugoslav Republic of Macedonia"
-"Martinique",NA,
+"Macedonia","The former Yugoslav Republic of Macedonia","The former Yugoslav Republic of Macedonia"
+"Martinique",NA,NA
 "Mauritius","Mauritius"
 "Mexico","Mexico"
 "Mongolia","Mongolia"
 "Morocco","Morocco"
 "Mozambique","Mozambique"
-"Myanmar (Burma)","Myanmar"
+"Myanmar (Burma)","Myanmar","Myanmar"
 "Netherlands","Netherlands"
 "Nicaragua","Nicaragua"
 "Niger","Niger"
 "Norway","Norway"
 "Pakistan","Pakistan"
-"Palestinian Territory, Occupied",NA
+"Palestinian Territory, Occupied",NA,NA
 "Peru","Peru"
 "Poland","Poland"
 "Portugal","Portugal"
 "Puerto Rico",NA,
-"Quebec",NA,
+"Quebec",NA,NA
 "Romania","Romania"
-"Russia","Russian Federation"
+"Russia","Russian Federation","Russian Federation"
 "Rwanda","Rwanda"
-"Saint Martin",NA
+"Saint Martin",NA,NA
 "Saudi Arabia","Saudi Arabia"
-"Serbia and Montenegro","Serbia,"
+"Serbia and Montenegro","Serbia","Serbia"
 "Singapore","Singapore"
 "Slovenia","Slovenia"
 "South Africa","South Africa"
-"South Korea","Republic of Korea"
+"South Korea","Republic of Korea","Republic of Korea"
 "Spain","Spain"
 "Sweden","Sweden"
 "Switzerland","Switzerland"
 "Syrian Arab Republic","Syrian Arab Republic"
-"Taiwan",NA
+"Taiwan",NA,NA
 "Tunisia","Tunisia"
 "Turkey","Turkey"
 "Ukraine","Ukraine"
 "United Arab Emirates","United Arab Emirates"
-"United States (USA)","United States of America"
+"United States (USA)","United States of America","United States of America"
 "Uruguay","Uruguay"
-"Various",NA,
-"Venezuela","Venezuela (Bolivarian Republic of)"
-"Viet Nam (Vietnam)","Viet Nam"
-"Wales",NA,
+"Various",NA,NA
+"Venezuela","Venezuela (Bolivarian Republic of)","Venezuela (Bolivarian Republic of)"
+"Viet Nam (Vietnam)","Viet Nam","Viet Nam"
+"Wales",NA,NA
 "Yemen","Yemen"
