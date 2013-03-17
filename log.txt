@@ -26,3 +26,9 @@ did
 in order to quote ISBN's so they go into R as text
 
 and removed a garbage '^K' character in just one of the ISBN (in source data)
+
+* 2013-03-17
+
+created country_authority.csv
+possibly something funny going on with text encoding in the name "Côte d'Ivoire"
+
