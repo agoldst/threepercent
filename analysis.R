@@ -8,14 +8,14 @@ tx$ISBN <- as.character(tx$ISBN)
 # normalizations
 
 # populations: WHO
-pop <- read.csv("who-pop/data-text.csv")
+pop <- read.csv("who-pop/data-text.csv",as.is=TRUE)
 
 # populations (in thousands) in 2010
 total.pop <- subset(pop,subset=(Indicator=="Population (in thousands) total" & Year==2010),select=c(Country,Numeric))
 
 # book production: UNESCO
 
-book.prod <- read.csv("unesco-book/book-prod.csv",skip=1,header=TRUE,na.strings="...",comment.char="#")
+book.prod <- read.csv("unesco-book/book-prod.csv",skip=1,header=TRUE,as.is=TRUE,na.strings="...",comment.char="#")
 
 lit.prod <- subset(book.prod,select=c(Country,Literature.4))
 
@@ -52,7 +52,7 @@ writeCountryNames <- function(threepct,who,unesco) {
 
 # I manually joined the output of this f'n to make country_authority.csv 
 # authority table for country names
-country.auth <- read.csv("country_authority.csv")
+country.auth <- read.csv("country_authority.csv",as.is=TRUE)
 
 # joined data
 # create a "hash" of country populations keyed to three percent country names
