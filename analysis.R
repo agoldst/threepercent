@@ -123,8 +123,8 @@ for(i in seq_along(countries.df$Country)) {
 
 # List top numbers for a given year
 # by category as specified by "per"
-# choices: per.lit, per.book, per.capita
-top.in.year <- function(df,year,n=10,per="per.lit") {
+# choices: per.lit, per.book, per.capita,Freq
+top.in.year <- function(df,year=2012,n=10,per="per.lit") {
   rows <- subset(df,subset=(Year==year))
   rows[order(rows[[per]],decreasing=TRUE)[1:n],]
 }
