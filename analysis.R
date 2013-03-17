@@ -15,13 +15,7 @@ total.pop <- subset(pop,subset=(Indicator=="Population (in thousands) total" & Y
 
 # book production: UNESCO
 
-book.prod <- read.csv("unesco-book/book-prod.csv",skip=1,header=TRUE,as.is=TRUE,na.strings="...",comment.char="#")
-
-lit.prod <- subset(book.prod,select=c(Country,Literature.4))
-
-lit.prod$prod.year <- 1999 # by default
-names(lit.prod) <- c("Country","Literature","prod.year")
-
+# unesco.fill.missing: utility function
 # initialize a data column from 1999 data and then
 # attempt to supply missing values iteratively
 # going backwards in time
@@ -59,24 +53,13 @@ unesco.fill.missing <- function(df,col="Literature") {
   result
 }
 
-# attempt to supply missing values
-# first from 1998
-missing.lits <- is.na(lit.prod$Literature)
-lit.prod$prod.year[missing.lits] <- 1998
-lit.prod$Literature[missing.lits] <- book.prod$Literature.3[missing.lits]
+unesco.prod <- read.csv("unesco-book/book-prod.csv",skip=1,header=TRUE,as.is=TRUE,na.strings="...",comment.char="#")
 
-# then from 1997
-missing.lits <- is.na(lit.prod$Literature)
-lit.prod$prod.year[missing.lits] <- 1997
-lit.prod$Literature[missing.lits] <- book.prod$Literature.2[missing.lits]
-
-# then from 1996
-missing.lits <- is.na(lit.prod$Literature)
-lit.prod$prod.year[missing.lits] <- 1996
-lit.prod$Literature[missing.lits] <- book.prod$Literature.1[missing.lits]
-
-# fix typing issue, make sure lit production number is typed as a number
-lit.prod$Literature <- as.numeric(as.character(lit.prod$Literature))
+lit.prod <- subset(unesco.fill.missing(unesco.prod,col="Literature"),
+                   select=c(Country,Literature.filled,Literature.year))
+ 
+book.prod <- subset(unesco.fill.missing(unesco.prod,col="Total"),
+                     select=c(Country,Total.filled,Total.year))
 
 # country name uniformity
 # function for outputting raw lists
@@ -86,7 +69,7 @@ writeCountryNames <- function(threepct,who,unesco) {
   writeLines(as.character(unesco$Country),con="unesco_countries.txt")
 }
 
-# I manually joined the output of this f'n to make country_authority.csv 
+# I manually collated the outputs of this f'n to make country_authority.csv 
 # authority table for country names
 country.auth <- read.csv("country_authority.csv",as.is=TRUE)
 
@@ -111,30 +94,38 @@ country.lit.prod.df <- subset(
 country.lit.prod <- country.lit.prod.df$Literature
 names(country.lit.prod) <- country.lit.prod.df$three.percent
 
+# and with total book production
+names(book.prod) <- c("UNESCO","Total","Total.year")
+country.book.prod.df <- subset(
+  merge(book.prod,country.auth),
+  select=c(three.percent,Total))
+
+country.book.prod <- country.book.prod.df$Total
+names(country.book.prod) <- country.book.prod.df$three.percent
+
 # summary data
 # per country
 country.table <- table(tx$Country,tx$Year)
 countries.df <- as.data.frame(country.table)
 names(countries.df) <- c("Country","Year","Freq")
 countries.df$per.capita <- NA
+countries.df$per.lit <- NA
 countries.df$per.book <- NA
 
 for(i in seq_along(countries.df$Country)) {
   countries.df$per.capita[i] <-
     countries.df$Freq[i] / country.pop[as.character(countries.df$Country[i])]
 
-  countries.df$per.book[i] <-
+  countries.df$per.lit[i] <-
     countries.df$Freq[i] / country.lit.prod[as.character(countries.df$Country[i])]
+  
+  countries.df$per.book[i] <-
+    countries.df$Freq[i] / country.book.prod[as.character(countries.df$Country[i])] 
 }
 
-top.in.year <- function(df,year,n=10,per.book=TRUE) {
+top.in.year <- function(df,year,n=10,per="per.lit") {
   rows <- subset(df,subset=(Year==year))
-  if(per.book) {
-    return(rows[order(rows$per.book,decreasing=TRUE)[1:n],])
-  }
-  else {
-    return(rows[order(rows$per.capita,decreasing=TRUE)[1:n],])
-  }
+  rows[order(rows[[per]],decreasing=TRUE)[1:n],]
 }
 
 # per language
