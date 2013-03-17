@@ -106,24 +106,23 @@ names(country.book.prod) <- country.book.prod.df$three.percent
 country.table <- table(tx$Country,tx$Year)
 countries.df <- as.data.frame(country.table)
 names(countries.df) <- c("Country","Year","Freq")
-countries.df$per.capita <- NA
+countries.df$per.million.pop <- NA
 countries.df$per.lit <- NA
 countries.df$per.book <- NA
 
-for(i in seq_along(countries.df$Country)) {
-  countries.df$per.capita[i] <-
-    countries.df$Freq[i] / country.pop[as.character(countries.df$Country[i])]
+countries.df$per.million.pop <-
+  1000 *
+  countries.df$Freq / country.pop[as.character(countries.df$Country)]
 
-  countries.df$per.lit[i] <-
-    countries.df$Freq[i] / country.lit.prod[as.character(countries.df$Country[i])]
-  
-  countries.df$per.book[i] <-
-    countries.df$Freq[i] / country.book.prod[as.character(countries.df$Country[i])] 
-}
+countries.df$per.lit <-
+  countries.df$Freq /
+  country.lit.prod[as.character(countries.df$Country)]
+
+countries.df$per.book <-
+  countries.df$Freq / country.book.prod[as.character(countries.df$Country)] 
 
 # List top numbers for a given year
 # by category as specified by "per"
-# choices: per.lit, per.book, per.capita,Freq
 top.in.year <- function(df,year=2012,n=10,per="per.lit") {
   rows <- subset(df,subset=(Year==year))
   rows[order(rows[[per]],decreasing=TRUE)[1:n],]
@@ -132,6 +131,8 @@ top.in.year <- function(df,year=2012,n=10,per="per.lit") {
 # per language
 # TODO language per capita counts
 languages.table <- table(tx$Language,tx$Year)
+languages.df <- as.data.frame(languages.table)
+names(languages.df) <- c("Language","Year","Freq")
 
 
 
